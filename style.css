@@ -661,6 +661,38 @@ button.chip:active { transform: scale(.93); }
 .env.open .env-front { transform: rotateY(180deg); }
 .env.open .env-back { transform: rotateY(360deg); }
 
+/* ---------- Image envelope ---------- */
+.env-back-img {
+  background: var(--card) !important;
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 0 !important;
+  overflow: hidden;
+}
+.env-back-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  inset: 0;
+}
+.env-caption {
+  position: relative;
+  z-index: 2;
+  background: rgba(0, 0, 0, .7);
+  color: #fff;
+  padding: 8px 14px;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  backdrop-filter: blur(8px);
+  text-align: center;
+}
+
 /* ---------- Footer ---------- */
 .footer {
   text-align: center;
