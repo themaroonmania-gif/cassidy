@@ -799,26 +799,28 @@ button.chip:active { transform: scale(.93); }
 .footer-secret.show { opacity: 1; }
 
 /* ---------- Toast ---------- */
+/* Fixed-position boxes with only max-width (no width) shrink-to-fit their
+   content, which — combined with break-word — could collapse this to an
+   unreadably narrow, many-line column. Give it a real width instead. */
 .toast {
   position: fixed;
   left: 50%;
-  bottom: 20px;
+  bottom: max(24px, env(safe-area-inset-bottom, 0px));
+  width: min(320px, 88vw);
   transform: translate(-50%, 100px);
   background: var(--lav-deep);
   color: #fff;
-  font-size: clamp(14px, 4vw, 16px);
+  font-size: clamp(15px, 4.2vw, 17px);
   font-weight: 600;
-  padding: 14px 20px;
-  border-radius: 12px;
+  padding: 16px 20px;
+  border-radius: 14px;
   box-shadow: 0 20px 50px -10px rgba(111, 79, 163, .6);
   z-index: 95;
   opacity: 0;
   pointer-events: none;
   transition: transform .45s var(--ease), opacity .45s var(--ease);
-  max-width: 80vw;
   text-align: center;
   line-height: 1.5;
-  word-wrap: break-word;
 }
 .toast.show { transform: translate(-50%, 0); opacity: 1; }
 
