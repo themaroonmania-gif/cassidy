@@ -395,12 +395,18 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  /* ---------- Shows: tap for a line ---------- */
-  document.querySelectorAll('.show').forEach(s => {
+  /* ---------- Shows: poster fallback + tap for a line ---------- */
+  document.querySelectorAll('.show-poster img').forEach(img => {
+    const fallback = img.nextElementSibling;
+    const showFallback = () => { img.hidden = true; fallback.hidden = false; };
+    img.addEventListener('error', showFallback);
+    if (img.complete && img.naturalWidth === 0) showFallback();
+  });
+  document.querySelectorAll('.show-card').forEach(s => {
     s.addEventListener('click', () => {
       say(s.dataset.say, 4200);
       const r = s.getBoundingClientRect();
-      burst(r.left + r.width - 26, r.top + r.height / 2, 8);
+      burst(r.left + r.width / 2, r.top + r.height / 2, 8);
     });
   });
 

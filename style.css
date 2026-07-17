@@ -390,38 +390,59 @@ button.chip:active { transform: scale(.93); }
 }
 
 /* ---------- Shows ---------- */
-.show-list { display: grid; gap: 12px; }
-.show {
+.show-grid {
   display: grid;
-  grid-template-columns: 30px 1fr 34px;
-  align-items: center;
+  grid-template-columns: repeat(3, 1fr);
   gap: 12px;
+}
+.show-card {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
   width: 100%;
-  text-align: left;
+  text-align: center;
   font-family: inherit;
   color: inherit;
-  background: var(--card);
-  border: 1.5px solid rgba(155, 127, 199, .18);
-  border-radius: 20px;
-  padding: 16px 14px;
-  box-shadow: 0 10px 26px -14px rgba(111, 79, 163, .3);
+  background: none;
+  border: 0;
+  padding: 0;
   transition: transform .25s var(--ease);
 }
-.show:active { transform: scale(.97); }
-.show-num {
-  font-family: var(--script);
-  font-size: 22px;
-  color: var(--lav);
-  text-align: center;
+.show-card:active { transform: scale(.95); }
+.show-poster {
+  position: relative;
+  display: block;
+  aspect-ratio: 2 / 3;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 10px 26px -12px rgba(111, 79, 163, .35);
 }
-.show-body { display: flex; flex-direction: column; gap: 3px; }
-.show-body b {
+.show-poster img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+/* Until the real poster art is dropped in, a soft gradient + the
+   show's little emoji stands in — same fail-safe pattern as Athena's card. */
+.show-fallback {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1.5px dashed rgba(155, 127, 199, .35);
+  border-radius: 14px;
+}
+.show-poster-1 .show-fallback { background: linear-gradient(160deg, #EDE4F8, #F7F3FC); }
+.show-poster-2 .show-fallback { background: linear-gradient(160deg, #E4F0DC, #F7F3FC); }
+.show-poster-3 .show-fallback { background: linear-gradient(160deg, #F8E4EC, #F7F3FC); }
+.sf-emoji { font-size: clamp(28px, 8vw, 40px); }
+.show-title {
   font-family: var(--display);
   font-weight: 600;
-  font-size: 18px;
+  font-size: 12.5px;
+  line-height: 1.25;
 }
-.show-body span { font-size: 12.5px; color: var(--ink-soft); line-height: 1.5; }
-.show-emoji { font-size: 24px; text-align: center; }
 
 /* ---------- Story timeline ---------- */
 .tl { position: relative; padding-left: 30px; }
