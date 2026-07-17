@@ -2,133 +2,184 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Cassidy Harden</title>
-<meta name="description" content="Cassidy Harden — Dallas, Texas.">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Cassidy Harden ♡</title>
+<meta name="description" content="Cassidy Harden — future Dr. Harden, Aggie, and the best part of every room she walks into.">
+<meta name="theme-color" content="#FFF3F0">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌼</text></svg>">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=Great+Vibes&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎀</text></svg>">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<div class="grain" aria-hidden="true"></div>
-
-<!-- ================= NAV ================= -->
-<header class="nav" id="nav">
-  <a href="#top" class="nav-name">Cassidy <em>Harden</em></a>
-  <nav class="nav-links" aria-label="Primary">
-    <a href="#about">About</a>
-    <a href="#gallery">Gallery</a>
-    <a href="#loves">Loves</a>
-    <a href="#hello" class="nav-pill">Say hi</a>
-  </nav>
-</header>
+<canvas id="fx" aria-hidden="true"></canvas>
 
 <!-- ================= HERO ================= -->
 <section class="hero" id="top">
-  <p class="hero-eyebrow reveal">Dallas, Texas</p>
-  <h1 class="hero-name">
-    <span class="line reveal">Cassidy</span>
-    <span class="line line-italic reveal d2"><em>Harden</em></span>
+  <canvas id="petals" aria-hidden="true"></canvas>
+  <p class="hero-script reveal">the one &amp; only</p>
+  <h1 class="hero-name" id="heroName">
+    <span class="reveal d1">Cassidy</span>
+    <span class="hero-last reveal d2"><em>Harden</em></span>
   </h1>
-  <!-- EDIT ME: her one-liner -->
-  <p class="hero-tag reveal d3">The best part of every room she walks into.</p>
-  <div class="hero-scroll reveal d4" aria-hidden="true">
-    <span></span>
+  <p class="hero-sub reveal d3">Dallas, Texas &middot; Mrs. Harden since <strong>4.5.25</strong></p>
+  <div class="hero-chips reveal d4">
+    <span class="chip" id="sunChip">☀️ be the light</span>
+    <span class="chip">🩺 future Dr. Harden</span>
+    <span class="chip">💎 Kendra Scott girlie</span>
+    <span class="chip">👍 gig &rsquo;em</span>
   </div>
-  <div class="hero-flower f1" aria-hidden="true">✿</div>
-  <div class="hero-flower f2" aria-hidden="true">❀</div>
-  <div class="hero-flower f3" aria-hidden="true">✿</div>
+  <p class="hero-hint reveal d4">tap anywhere for sparkles ✨</p>
+  <div class="hero-photo reveal d3">
+    <img src="photos/wedding-01.jpg" alt="Cassidy and Thomas sitting in a field" fetchpriority="high">
+    <span class="hero-photo-tape" aria-hidden="true"></span>
+  </div>
 </section>
 
-<!-- ================= MARQUEE ================= -->
+<!-- ================= RIBBON ================= -->
 <div class="ribbon" aria-hidden="true">
   <div class="ribbon-track">
-    <!-- EDIT ME: little words that feel like her -->
-    <span>kind heart <i>✿</i> sharp wit <i>✿</i> golden hour <i>✿</i> iced coffee <i>✿</i> Dallas girl <i>✿</i> </span><span>kind heart <i>✿</i> sharp wit <i>✿</i> golden hour <i>✿</i> iced coffee <i>✿</i> Dallas girl <i>✿</i> </span>
+    <span>be the light ☀️ <i>✦</i> gig &rsquo;em 👍 <i>✦</i> future Dr. Harden 🩺 <i>✦</i> iced coffee, obviously ☕ <i>✦</i> Kendra Scott girlie 💎 <i>✦</i> Aggie sweetheart 💍 <i>✦</i> </span><span>be the light ☀️ <i>✦</i> gig &rsquo;em 👍 <i>✦</i> future Dr. Harden 🩺 <i>✦</i> iced coffee, obviously ☕ <i>✦</i> Kendra Scott girlie 💎 <i>✦</i> Aggie sweetheart 💍 <i>✦</i> </span>
   </div>
 </div>
 
-<!-- ================= ABOUT ================= -->
-<section class="about section" id="about">
-  <div class="container about-grid">
-    <div class="about-photo reveal">
-      <!-- EDIT ME: drop her favorite photo at photos/cassidy.jpg and swap the div below for:
-           <img src="photos/cassidy.jpg" alt="Cassidy Harden"> -->
-    <div class="photo-slot">
-        <span class="photo-mark">✿</span>
-        <span class="photo-note">her favorite photo goes here</span>
+<!-- ================= COUNTER ================= -->
+<section class="counter section">
+  <div class="counter-card reveal" id="counterCard">
+    <p class="counter-kicker">and counting…</p>
+    <div class="counter-num" id="counterNum">0</div>
+    <p class="counter-label" id="counterLabel">days of being ridiculously loved</p>
+    <p class="counter-sub">since April 5, 2025 — College Station, TX</p>
+  </div>
+</section>
+
+<!-- ================= STORY ================= -->
+<section class="story section" id="story">
+  <p class="sec-script reveal">her story so far</p>
+  <h2 class="sec-title reveal d1">From Troy girl to<br><em>Dr. Harden (loading…)</em></h2>
+
+  <div class="tl">
+    <div class="tl-item reveal">
+      <span class="tl-dot">🌱</span>
+      <div class="tl-body">
+        <h3>Troy, Texas</h3>
+        <p>Small town, big heart. The origin story.</p>
       </div>
-      <div class="about-sticker">est.<br>11 / 22</div>
     </div>
-    <div class="about-copy">
-      <p class="sec-kicker reveal">A little about her</p>
-      <h2 class="sec-title reveal d1">Warm, funny, and<br><em>impossible not to love.</em></h2>
-      <!-- EDIT ME: the real bio -->
-      <p class="reveal d2">This is where the story goes — who Cassidy is, what she loves, what she's building, and the things that make her laugh. Written by someone who clearly adores her.</p>
-      <p class="reveal d3">Until then, the important facts are below, and every one of them is verifiable.</p>
-      <ul class="fact-chips reveal d4">
-        <!-- EDIT ME: quick facts -->
-        <li>☕ has a coffee order longer than this site</li>
-        <li>📍 Dallas, TX</li>
-        <li>💛 married to her biggest fan</li>
-        <li>🌼 November birthday, acts like it</li>
-      </ul>
+    <div class="tl-item reveal">
+      <span class="tl-dot">👍</span>
+      <div class="tl-body">
+        <h3>Texas A&amp;M &rsquo;25</h3>
+        <p>Health Sciences, whoop. The good ring, the good years, and one very lucky guy she met along the way.</p>
+        <img src="photos/wedding-04.jpg" alt="Cassidy and Thomas giving thumbs up" loading="lazy">
+      </div>
+    </div>
+    <div class="tl-item reveal">
+      <span class="tl-dot">💍</span>
+      <div class="tl-body">
+        <h3>She said yes</h3>
+        <p>A beach in Hawaii, one knee, zero hesitation.</p>
+        <img src="photos/wedding-10.jpg" alt="The proposal on a beach in Hawaii" loading="lazy">
+      </div>
+    </div>
+    <div class="tl-item reveal">
+      <span class="tl-dot">🤍</span>
+      <div class="tl-body">
+        <h3>April 5, 2025</h3>
+        <p>A garden-party wedding in College Station. Best day ever, and it&rsquo;s not close.</p>
+      </div>
+    </div>
+    <div class="tl-item reveal">
+      <span class="tl-dot">🩺</span>
+      <div class="tl-body">
+        <h3>TWU, Doctor of Occupational Therapy &rsquo;28</h3>
+        <p>Currently out-studying everyone in Texas.</p>
+        <div class="loading-bar"><span id="drBar"></span></div>
+        <p class="loading-note">Dr. Harden: <b id="drPct">0%</b> complete &mdash; patience, she&rsquo;s worth it</p>
+      </div>
     </div>
   </div>
 </section>
 
 <!-- ================= GALLERY ================= -->
 <section class="gallery section" id="gallery">
-  <div class="container">
-    <p class="sec-kicker reveal">Gallery</p>
-    <h2 class="sec-title reveal d1">Proof of a life<br><em>well loved.</em></h2>
-    <div class="gallery-grid">
-      <!-- EDIT ME: replace each .g-slot with <img src="photos/1.jpg" alt=""> etc.
-           Tiles keep their size automatically. -->
-      <figure class="g-tile t1 reveal"><div class="g-slot"><span>photo 01</span></div><figcaption>the one where she laughs</figcaption></figure>
-      <figure class="g-tile t2 reveal d1"><div class="g-slot"><span>photo 02</span></div><figcaption>golden hour, obviously</figcaption></figure>
-      <figure class="g-tile t3 reveal d2"><div class="g-slot"><span>photo 03</span></div><figcaption>somewhere in Texas</figcaption></figure>
-      <figure class="g-tile t4 reveal"><div class="g-slot"><span>photo 04</span></div><figcaption>the good hair day</figcaption></figure>
-      <figure class="g-tile t5 reveal d1"><div class="g-slot"><span>photo 05</span></div><figcaption>date night</figcaption></figure>
-      <figure class="g-tile t6 reveal d2"><div class="g-slot"><span>photo 06</span></div><figcaption>add caption here</figcaption></figure>
-    </div>
+  <p class="sec-script reveal">the camera roll</p>
+  <h2 class="sec-title reveal d1">Swipe. It gets<br><em>even cuter.</em></h2>
+  <div class="polaroids" id="polaroids">
+    <figure class="pola"><img src="photos/wedding-02.jpg" alt="" loading="lazy"><figcaption>no. 01 ♡</figcaption></figure>
+    <figure class="pola"><img src="photos/wedding-03.jpg" alt="" loading="lazy"><figcaption>no. 02 ♡</figcaption></figure>
+    <figure class="pola"><img src="photos/wedding-05.jpg" alt="" loading="lazy"><figcaption>no. 03 ♡</figcaption></figure>
+    <figure class="pola"><img src="photos/wedding-06.jpg" alt="" loading="lazy"><figcaption>no. 04 ♡</figcaption></figure>
+    <figure class="pola"><img src="photos/wedding-07.jpg" alt="" loading="lazy"><figcaption>no. 05 ♡</figcaption></figure>
+    <figure class="pola"><img src="photos/wedding-08.jpg" alt="" loading="lazy"><figcaption>no. 06 ♡</figcaption></figure>
+    <figure class="pola"><img src="photos/wedding-09.jpg" alt="" loading="lazy"><figcaption>no. 07 ♡</figcaption></figure>
+    <figure class="pola"><img src="photos/wedding-11.jpg" alt="" loading="lazy"><figcaption>no. 08 ♡</figcaption></figure>
+    <figure class="pola"><img src="photos/wedding-12.jpg" alt="" loading="lazy"><figcaption>no. 09 ♡</figcaption></figure>
+    <figure class="pola"><img src="photos/wedding-13.jpg" alt="" loading="lazy"><figcaption>no. 10 ♡</figcaption></figure>
+    <figure class="pola"><img src="photos/wedding-14.jpg" alt="" loading="lazy"><figcaption>no. 11 ♡</figcaption></figure>
+    <figure class="pola"><img src="photos/wedding-15.jpg" alt="" loading="lazy"><figcaption>no. 12 ♡</figcaption></figure>
+  </div>
+  <p class="gallery-hint reveal">← swipe →</p>
+</section>
+
+<!-- ================= SO HER ================= -->
+<section class="soher section">
+  <p class="sec-script reveal">extremely well documented facts</p>
+  <h2 class="sec-title reveal d1">Things that are<br><em>just so her.</em></h2>
+  <div class="fact-grid">
+    <div class="fact reveal"><b>759</b><span>recipes pinned &amp; counting</span></div>
+    <div class="fact reveal d1"><b>477</b><span>outfits saved &ldquo;for later&rdquo;</span></div>
+    <div class="fact reveal d2"><b>∞</b><span>people she&rsquo;s kind to</span></div>
+    <div class="fact reveal"><b>1</b><span>husband, extremely obsessed</span></div>
+    <div class="fact reveal d1"><b>☕</b><span>iced, even in January</span></div>
+    <div class="fact reveal d2"><b>📸</b><span>photographer of every sunset</span></div>
   </div>
 </section>
 
-<!-- ================= LOVES ================= -->
-<section class="loves section" id="loves">
-  <div class="container">
-    <p class="sec-kicker reveal">Currently loving</p>
-    <h2 class="sec-title reveal d1">A running list of<br><em>very good things.</em></h2>
-    <div class="loves-list">
-      <!-- EDIT ME: swap these for her real favorites -->
-      <a class="love-row reveal" href="#hello"><span class="love-num">01</span><span class="love-name">Iced coffee that costs too much</span><span class="love-note">worth it every time</span></a>
-      <a class="love-row reveal d1" href="#hello"><span class="love-num">02</span><span class="love-name">A show she'll never admit to rewatching</span><span class="love-note">season 3 again</span></a>
-      <a class="love-row reveal d2" href="#hello"><span class="love-num">03</span><span class="love-name">Sunday mornings with nowhere to be</span><span class="love-note">the good kind of slow</span></a>
-      <a class="love-row reveal d3" href="#hello"><span class="love-num">04</span><span class="love-name">Her people</span><span class="love-note">fiercely</span></a>
+<!-- ================= SCRATCH ================= -->
+<section class="scratch section">
+  <p class="sec-script reveal">psst</p>
+  <h2 class="sec-title reveal d1">Scratch to reveal<br><em>a note from him.</em></h2>
+  <div class="scratch-wrap reveal d2">
+    <div class="scratch-msg">
+      <p>You&rsquo;re my favorite person<br>in every room, every city,<br>every timeline. <b>— T</b></p>
     </div>
+    <canvas id="scratchPad"></canvas>
   </div>
+  <p class="scratch-hint reveal d3">use your finger, it&rsquo;s a lottery ticket of love 💅</p>
 </section>
 
-<!-- ================= HELLO ================= -->
-<section class="hello section" id="hello">
-  <div class="container hello-inner">
-    <p class="sec-kicker reveal">Say hi</p>
-    <h2 class="hello-title reveal d1">Be nice to her<br><em>or else.</em></h2>
-    <p class="hello-sub reveal d2">— the management</p>
-    <!-- EDIT ME: her real email or Instagram -->
-    <a class="hello-btn reveal d3" href="mailto:hello@example.com">hello@example.com</a>
+<!-- ================= OPEN WHEN ================= -->
+<section class="openwhen section">
+  <p class="sec-script reveal">tap an envelope</p>
+  <h2 class="sec-title reveal d1">Open when<em>…</em></h2>
+  <div class="env-grid">
+    <button class="env reveal" type="button">
+      <span class="env-front">💌<b>school is<br>too much</b></span>
+      <span class="env-back">You've never once failed at a thing you cared about. Future Dr. Harden isn't a maybe — it's a scheduling detail. Go to bed.</span>
+    </button>
+    <button class="env reveal d1" type="button">
+      <span class="env-front">💌<b>you need<br>a laugh</b></span>
+      <span class="env-back">Reminder: you married a man who built you a website with easter eggs instead of just buying flowers. Both are coming, actually.</span>
+    </button>
+    <button class="env reveal d2" type="button">
+      <span class="env-front">💌<b>you miss<br>me</b></span>
+      <span class="env-back">Check the driveway. If I'm not there, I'm on my way. If I'm at work, close your eyes — I'm the warm part of the blanket.</span>
+    </button>
   </div>
 </section>
 
 <!-- ================= FOOTER ================= -->
 <footer class="footer">
-  <p>Cassidy Harden &middot; Dallas, TX</p>
-  <p class="footer-love">built with an irresponsible amount of love</p>
+  <p class="footer-script">for all the days along the way</p>
+  <p>Cassidy Harden &middot; est. 4.5.25</p>
+  <p class="footer-love">made with an irresponsible amount of love, by your husband 🤍</p>
+  <p class="footer-secret" id="footerSecret">ok, you scrolled all the way down. one more secret: he loves you more. it's not a competition but he's winning.</p>
 </footer>
+
+<div class="toast" id="toast" role="status"></div>
 
 <script src="script.js"></script>
 </body>
