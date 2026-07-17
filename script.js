@@ -1,5 +1,6 @@
 /* ============================================================
    Cassidy Harden ♡ — effects & easter eggs
+   Lavender + matcha, flowers + dogs.
    Touch-first, fail-safe: the site reads fine if none of
    this ever runs.
    ============================================================ */
@@ -9,6 +10,7 @@ document.documentElement.classList.add('js');
 document.addEventListener('DOMContentLoaded', () => {
 
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const TOGETHER = new Date(2022, 3, 14); // April 14, 2022
   const WEDDING = new Date(2025, 3, 5); // April 5, 2025
 
   /* ---------- Toast ---------- */
@@ -42,7 +44,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const sizeFx = () => { fx.width = innerWidth * devicePixelRatio; fx.height = innerHeight * devicePixelRatio; fctx.scale(devicePixelRatio, devicePixelRatio); };
   sizeFx();
   addEventListener('resize', sizeFx);
-  const GLYPHS = ['✨', '💖', '🌸', '⭐', '🤍', '💕'];
+  const GLYPHS = ['✨', '💜', '🌸', '🐾', '🍵', '🌷', '🌼'];
+  let fxRunning = false;
   const burst = (x, y, n = 14) => {
     if (reduced) return;
     for (let i = 0; i < n; i++) {
@@ -59,6 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
         rot: Math.random() * Math.PI
       });
     }
+    if (!fxRunning) { fxRunning = true; requestAnimationFrame(tickFx); }
   };
   const tickFx = () => {
     fctx.clearRect(0, 0, innerWidth, innerHeight);
@@ -75,9 +79,10 @@ document.addEventListener('DOMContentLoaded', () => {
       fctx.fillText(p.g, 0, 0);
       fctx.restore();
     });
-    requestAnimationFrame(tickFx);
+    // Sleep the loop once the last sparkle dies — her battery is not a toy.
+    if (parts.length) requestAnimationFrame(tickFx);
+    else fxRunning = false;
   };
-  if (!reduced) tickFx();
   addEventListener('pointerdown', e => burst(e.clientX, e.clientY), { passive: true });
 
   /* ---------- Falling petals in hero ---------- */
@@ -88,29 +93,65 @@ document.addEventListener('DOMContentLoaded', () => {
     const sizeP = () => { pc.width = hero.offsetWidth; pc.height = hero.offsetHeight; };
     sizeP();
     addEventListener('resize', sizeP);
-    const petals = Array.from({ length: 16 }, () => ({
+    // Mostly soft lavender/matcha petals, with the occasional flower or
+    // paw print drifting through. Flowers and dogs, as requested.
+    const GLYPH_DROPS = ['🌸', '🌷', '🌼', '🐾', '💜', '🍃'];
+    const petals = Array.from({ length: 18 }, (_, i) => ({
       x: Math.random() * pc.width,
       y: Math.random() * pc.height,
       r: Math.random() * 7 + 4,
       sway: Math.random() * 1.4 + .4,
       fall: Math.random() * .5 + .3,
       phase: Math.random() * Math.PI * 2,
-      hue: Math.random() > .5 ? '217, 106, 133' : '212, 168, 83'
+      hue: Math.random() > .5 ? '155, 127, 199' : '140, 175, 111',
+      // every third drop is a little flower or paw instead of a petal
+      glyph: i % 3 === 0 ? GLYPH_DROPS[(Math.random() * GLYPH_DROPS.length) | 0] : null,
+      size: Math.random() * 10 + 14
     }));
-    (function drawPetals(t) {
+    // Only animate while the hero is actually on screen and the tab is visible.
+    let petalsOn = false;
+    const drawPetals = () => {
+      if (!petalsOn) return;
       pctx.clearRect(0, 0, pc.width, pc.height);
       petals.forEach(p => {
         p.y += p.fall;
         p.phase += .012;
         const x = p.x + Math.sin(p.phase) * 28 * p.sway;
-        if (p.y > pc.height + 20) { p.y = -20; p.x = Math.random() * pc.width; }
-        pctx.beginPath();
-        pctx.ellipse(x, p.y, p.r, p.r * .62, Math.sin(p.phase) * .9, 0, Math.PI * 2);
-        pctx.fillStyle = `rgba(${p.hue}, .28)`;
-        pctx.fill();
+        if (p.y > pc.height + 24) { p.y = -24; p.x = Math.random() * pc.width; }
+        if (p.glyph) {
+          pctx.save();
+          pctx.globalAlpha = .55;
+          pctx.translate(x, p.y);
+          pctx.rotate(Math.sin(p.phase) * .5);
+          pctx.font = p.size + 'px serif';
+          pctx.textAlign = 'center';
+          pctx.fillText(p.glyph, 0, 0);
+          pctx.restore();
+        } else {
+          pctx.beginPath();
+          pctx.ellipse(x, p.y, p.r, p.r * .62, Math.sin(p.phase) * .9, 0, Math.PI * 2);
+          pctx.fillStyle = `rgba(${p.hue}, .30)`;
+          pctx.fill();
+        }
       });
       requestAnimationFrame(drawPetals);
-    })();
+    };
+    const setPetals = on => {
+      if (on === petalsOn) return;
+      petalsOn = on;
+      if (on) requestAnimationFrame(drawPetals);
+    };
+    setPetals(true);
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(
+        es => setPetals(es[0].isIntersecting && !document.hidden),
+        { threshold: 0 }
+      ).observe(hero);
+    }
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) setPetals(false);
+      else if (hero.getBoundingClientRect().bottom > 0) setPetals(true);
+    });
   }
 
   /* ---------- Days-married counter (tap to change units) ---------- */
@@ -139,6 +180,21 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  /* ---------- Together since April 14, 2022 ---------- */
+  const tgNum = document.getElementById('togetherNum');
+  const tgYrs = document.getElementById('togetherYrs');
+  if (tgNum && tgYrs) {
+    const draw = () => {
+      const ms = Date.now() - TOGETHER.getTime();
+      const days = Math.floor(ms / 864e5);
+      const years = Math.floor(days / 365.25);
+      tgNum.textContent = days.toLocaleString('en-US');
+      tgYrs.textContent = years.toLocaleString('en-US');
+    };
+    draw();
+    setInterval(draw, 1000);
+  }
+
   /* ---------- Dr. Harden loading bar ---------- */
   const bar = document.getElementById('drBar');
   const pct = document.getElementById('drPct');
@@ -147,7 +203,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const start = new Date(2025, 5, 13).getTime();
     const end = new Date(2028, 4, 15).getTime();
     const p = Math.min(Math.max((Date.now() - start) / (end - start), 0.02), 1);
+    let shown = false;
     const show = () => {
+      if (shown) return;
+      shown = true;
       bar.style.width = (p * 100).toFixed(1) + '%';
       let c = 0;
       const t = setInterval(() => {
@@ -161,6 +220,10 @@ document.addEventListener('DOMContentLoaded', () => {
         if (e.isIntersecting) { show(); bio.disconnect(); }
       }), { threshold: .5 });
       bio.observe(bar.parentElement);
+      // Safety valve: if the observer never fires, don't leave her staring
+      // at "Dr. Harden: 0% complete" forever. That's the one number that must
+      // never lie.
+      setTimeout(show, 4000);
     } else show();
   }
 
@@ -174,9 +237,9 @@ document.addEventListener('DOMContentLoaded', () => {
       pad.width = wrap.offsetWidth;
       pad.height = wrap.offsetHeight;
       const grad = sctx.createLinearGradient(0, 0, pad.width, pad.height);
-      grad.addColorStop(0, '#D96A85');
-      grad.addColorStop(.5, '#E89AAD');
-      grad.addColorStop(1, '#D4A853');
+      grad.addColorStop(0, '#9B7FC7');
+      grad.addColorStop(.5, '#BDA5DE');
+      grad.addColorStop(1, '#8CAF6F');
       sctx.fillStyle = grad;
       sctx.fillRect(0, 0, pad.width, pad.height);
       sctx.fillStyle = 'rgba(255,255,255,.85)';
@@ -271,6 +334,85 @@ document.addEventListener('DOMContentLoaded', () => {
         setTimeout(() => document.body.style.filter = '', 2600);
         say('☀️ you ARE the light. that’s the whole point.');
       }
+    });
+  }
+
+  /* ---------- Easter egg: the 🍵 matcha chip ---------- */
+  const matcha = document.getElementById('matchaChip');
+  if (matcha) {
+    let mTaps = 0;
+    matcha.addEventListener('click', e => {
+      e.stopPropagation();
+      mTaps++;
+      if (reduced) { say('🍵 iced. even in January. never coffee.'); return; }
+      for (let i = 0; i < 18; i++) {
+        const d = document.createElement('div');
+        d.className = 'paw';
+        d.textContent = '🍵';
+        d.style.left = Math.random() * 92 + 'vw';
+        d.style.top = Math.random() * 60 + 20 + 'vh';
+        d.style.animationDelay = (Math.random() * .5) + 's';
+        document.body.appendChild(d);
+        setTimeout(() => d.remove(), 2200);
+      }
+      say(mTaps >= 3 ? '🍵 ok that’s enough matcha. (never. — her)' : '🍵 iced. even in January. never coffee.');
+    });
+  }
+
+  /* ---------- Athena: photo fallback + paw prints ---------- */
+  const athImg = document.getElementById('athenaImg');
+  const athFall = document.getElementById('athenaFallback');
+  if (athImg && athFall) {
+    const showFallback = () => { athImg.hidden = true; athFall.hidden = false; };
+    athImg.addEventListener('error', showFallback);
+    if (athImg.complete && athImg.naturalWidth === 0) showFallback();
+  }
+  const athCard = document.getElementById('athenaCard');
+  if (athCard) {
+    const BOOFS = [
+      'AWOOO 🐺 (she has no idea what you said)',
+      '🐾 Athena has been notified. She does not care.',
+      'she heard the treat bag from three rooms away 🦴',
+      'ranked #1 in this household. it isn’t close. 🐺',
+      'she’s already on the couch. she was never off the couch.'
+    ];
+    let b = 0;
+    athCard.addEventListener('click', e => {
+      const r = athCard.getBoundingClientRect();
+      if (!reduced) {
+        for (let i = 0; i < 8; i++) {
+          const p = document.createElement('div');
+          p.className = 'paw';
+          p.textContent = '🐾';
+          p.style.left = (r.left + Math.random() * r.width) + 'px';
+          p.style.top = (r.top + Math.random() * r.height) + 'px';
+          p.style.animationDelay = (i * .07) + 's';
+          document.body.appendChild(p);
+          setTimeout(() => p.remove(), 1800);
+        }
+      }
+      say(BOOFS[b++ % BOOFS.length]);
+    });
+  }
+
+  /* ---------- Shows: tap for a line ---------- */
+  document.querySelectorAll('.show').forEach(s => {
+    s.addEventListener('click', () => {
+      say(s.dataset.say, 4200);
+      const r = s.getBoundingClientRect();
+      burst(r.left + r.width - 26, r.top + r.height / 2, 8);
+    });
+  });
+
+  /* ---------- Easter egg: the hidden 🍍 (Psych rules) ---------- */
+  const pine = document.getElementById('pineapple');
+  if (pine) {
+    pine.addEventListener('click', () => {
+      pine.classList.add('found');
+      for (let i = 0; i < 4; i++) {
+        setTimeout(() => burst(Math.random() * innerWidth, innerHeight * (.4 + Math.random() * .5), 14), i * 180);
+      }
+      say('🍍 you found the pineapple. of course you did. — Shawn would be proud', 5200);
     });
   }
 
