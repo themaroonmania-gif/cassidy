@@ -395,6 +395,23 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  /* ---------- Two-part joke card: tap for the punchline ---------- */
+  const jokeFact = document.getElementById('jokeFact');
+  const jokeText = document.getElementById('jokeText');
+  if (jokeFact && jokeText) {
+    let punched = false;
+    jokeFact.addEventListener('click', () => {
+      punched = !punched;
+      if (punched) {
+        jokeText.innerHTML = jokeText.dataset.punch;
+        const r = jokeFact.getBoundingClientRect();
+        burst(r.left + r.width / 2, r.top + r.height / 2, 12);
+      } else {
+        jokeText.innerHTML = jokeText.dataset.setup + ' <i>(tap)</i>';
+      }
+    });
+  }
+
   /* ---------- Shows: poster fallback + tap for a line ---------- */
   document.querySelectorAll('.show-poster img').forEach(img => {
     const fallback = img.nextElementSibling;

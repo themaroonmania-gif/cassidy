@@ -565,6 +565,12 @@ button.chip:active { transform: scale(.93); }
   transition: transform .25s var(--ease);
 }
 .fact:active { transform: scale(.96) rotate(-1deg); }
+.fact-joke {
+  width: 100%;
+  font-family: inherit;
+  color: inherit;
+}
+.fact-joke .joke-text i { font-style: italic; opacity: .6; font-weight: 500; }
 .fact b {
   display: block;
   font-family: var(--display);
